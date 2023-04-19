@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "backend": "^0.0.0",
+    "recipe-man-frontend": "file:frontend"
+  }
+}
