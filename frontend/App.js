@@ -56,11 +56,16 @@ function App() {
               {...params}
               variant="outlined"
               label="Wprowadź składniki"
+              fullWidth
+              className="search-input"
             />
           )}
         />
-        <button onClick={handleSearchRecipes}>Szukaj przepisów</button>
+        <button className="search-button" onClick={handleSearchRecipes}>
+          Szukaj przepisów
+        </button>
       </div>
+
       <div className="recipes-container">
         {recipes.map((recipe, index) => (
           <div key={index} className="recipe">
