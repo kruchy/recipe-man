@@ -10,9 +10,29 @@ on:
       - main
 
 jobs:
-  job_for_frontend:
+  path_filter:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, '[frontend]')"
+    outputs:
+      frontend: ${{ steps.filter.outputs.frontend }}
+      backend: ${{ steps.filter.outputs.backend }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Filter paths
+        id: filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            frontend:
+              - "frontend/**"
+            backend:
+              - "backend/**"
+
+  job_for_frontend:
+    needs: path_filter
+    runs-on: ubuntu-latest
+    if: needs.path_filter.outputs.frontend == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -27,14 +47,14 @@ jobs:
 
       - name: Run tests
         run: npm test frontend
- 
+
       - name: Build project
         run: npm run build frontend
 
-
   job_for_backend:
+    needs: path_filter
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, '[backend]')"
+    if: needs.path_filter.outputs.backend == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -49,6 +69,6 @@ jobs:
 
       - name: Run tests
         run: npm test backend
- 
+
       - name: Build project
         run: npm run build backend
