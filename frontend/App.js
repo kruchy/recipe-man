@@ -16,7 +16,7 @@ function App() {
   const [ingredients, setIngredients] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
-
+  const apiUrl = process.env.REACT_BACKEND_URL;
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => setError(null), 10000);
@@ -26,7 +26,7 @@ function App() {
 
   const handleSearchRecipes = async () => {
     try {
-      const response = await fetch("http://localhost:3001/generateRecipes", {
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
