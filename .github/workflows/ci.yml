@@ -43,13 +43,17 @@ jobs:
           node-version: 14
 
       - name: Install dependencies
-        run: npm ci frontend
+        run: npm ci
+        working-directory: ./frontend
 
       - name: Run tests
-        run: npm test frontend
+        run: npm test
+        working-directory: ./frontend
+        
 
       - name: Build project
-        run: npm run build frontend
+        run: npm run build
+        working-directory: ./frontend
 
   job_for_backend:
     needs: path_filter
@@ -65,10 +69,13 @@ jobs:
           node-version: 14
 
       - name: Install dependencies
-        run: npm ci backend
+        run: npm ci
+        working-directory: ./backend
 
       - name: Run tests
-        run: npm test backend
+        run: npm test
+        working-directory: ./backend
 
       - name: Build project
-        run: npm run build backend
+        run: npm run build
+        working-directory: ./backend
