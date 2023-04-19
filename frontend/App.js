@@ -2,21 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-
-const knownIngredients = [
-  "jajko",
-  "mąka",
-  "cukier",
-  "sól",
-  "pieprz",
-  // Dodaj więcej znanych składników tutaj...
-];
+import knownIngredients from "./ingredients";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
-  const apiUrl = process.env.REACT_BACKEND_URL;
+  const apiUrl = process.env.REACT_APP_BACKEND_URL;
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => setError(null), 10000);
