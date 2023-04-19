@@ -10,6 +10,7 @@ app.use(json());
 export async function generateRecipesHandler(req, res) {
 
    const ingredients = req.body.ingredients;
+   
     try {
       const response = await post("https://api.openai.com/v1/engines/davinci-codex/completions", {
         prompt: `Generate recipes using the following ingredients: ${ingredients.join(", ")}`,
