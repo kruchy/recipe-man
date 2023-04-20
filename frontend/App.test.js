@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
+import { act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import App from "./App";
 
